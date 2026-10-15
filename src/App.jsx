@@ -343,7 +343,7 @@ const education = {
   shortName: "AASTU",
   degree: "Bachelor of Science in Software Engineering",
   expected: "Expected Jun 2027",
-  level: "Fourth-year software engineering student",
+  level: "Fifth-year software engineering student · Graduating Class (GC)",
   location: "Addis Ababa, Ethiopia",
   focus: ["Software Engineering", "Full-stack Development", "Databases", "AI Automation", "Problem Solving"],
   logo: "https://www.aastu.edu.et/Application/assets/images/logo.jpg"
