@@ -55,6 +55,30 @@ const skills = [
 
 const projects = [
   {
+    title: "Swift",
+    kicker: "Commercial Property Management Platform",
+    visual: "swift",
+    github: "https://github.com/snapwre/swift.git",
+    live: "https://swift-app.snapwre.com/",
+    description:
+      "A commercial property management platform bringing leasing, rent, maintenance, tenant communication, documents, and reporting into one workspace.",
+    features: ["Leasing", "Rent management", "Maintenance", "Tenant communication", "Reporting"],
+    tags: ["Property Management", "Leasing", "Maintenance", "Reporting"],
+    gradient: "from-violet-500 via-indigo-700 to-slate-950"
+  },
+  {
+    title: "Open Research Data Portal",
+    kicker: "Research Dataset Management Platform",
+    visual: "researchPortal",
+    github: "https://github.com/Open-Research-Data-Portal",
+    live: "https://ordp-frontend.vercel.app/",
+    description:
+      "A research data platform for uploading, organizing, searching, versioning, and sharing datasets with rich metadata and role-based access control.",
+    features: ["Dataset management", "Metadata", "Dataset search", "Versioning", "Access control"],
+    tags: ["React", "Django REST Framework", "PostgreSQL", "JWT"],
+    gradient: "from-cyan-400 via-blue-700 to-slate-950"
+  },
+  {
     title: "AI Automation Systems",
     kicker: "ZEC AI Automation Agency",
     company: "ZEC AI Automation Agency",
@@ -115,28 +139,6 @@ const projects = [
     features: ["Robot monitoring", "Remote controls", "Live status", "Agriculture IoT", "Mobile dashboard"],
     tags: ["React", "IoT UI", "Dashboard", "Agriculture", "Real-time control"],
     gradient: "from-emerald-400 via-teal-700 to-slate-950"
-  },
-  {
-    title: "Swift",
-    kicker: "Snapwre Web Application",
-    github: "https://github.com/snapwre/swift.git",
-    live: "https://swift-app.snapwre.com/",
-    description:
-      "Swift is a web application from Snapwre. Explore the live application or view the project source on GitHub.",
-    features: ["Live application", "Source code"],
-    tags: ["Web Application", "Snapwre"],
-    gradient: "from-violet-500 via-indigo-700 to-slate-950"
-  },
-  {
-    title: "Open Research Data Portal",
-    kicker: "Research Dataset Management Platform",
-    github: "https://github.com/Open-Research-Data-Portal",
-    live: "https://ordp-frontend.vercel.app/",
-    description:
-      "A research data platform for uploading, organizing, searching, versioning, and sharing datasets with rich metadata and role-based access control.",
-    features: ["Dataset management", "Metadata", "Dataset search", "Versioning", "Access control"],
-    tags: ["React", "Django REST Framework", "PostgreSQL", "JWT"],
-    gradient: "from-cyan-400 via-blue-700 to-slate-950"
   }
 ];
 
@@ -480,21 +482,21 @@ function ThreeDShowcase() {
       number: "01",
       title: "AI Automation Systems",
       topic: "Automation workflows",
-      project: projects[0],
+      project: projects.find((project) => project.title === "AI Automation Systems"),
       text: "ZEC agency work focused on n8n, OpenAI, CRM routing, webhooks, Telegram alerts, monitoring, and reusable client handoff systems."
     },
     {
       number: "02",
       title: "Product Interfaces",
       topic: "Frontend applications",
-      project: projects[2],
+      project: projects.find((project) => project.title === "BookVerse"),
       text: "React and Vite interfaces such as BookVerse and Foodie Finder, built around search, filtering, responsive layouts, and clean user flows."
     },
     {
       number: "03",
       title: "Mobile + Data Apps",
       topic: "Flutter and dashboards",
-      project: projects[1],
+      project: projects.find((project) => project.title === "Smart Utility Tracker"),
       text: "Mobile-first systems like Smart Utility Tracker, using Flutter, Dart, SQLite, usage history, payments, reminders, and local data storage."
     }
   ];
@@ -1408,12 +1410,71 @@ function AgriBotProjectMockup() {
   );
 }
 
+function WebsiteProjectPreview({ project }) {
+  const isSwift = project.visual === "swift";
+  return (
+    <a href={project.live} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} live demo`} className="mt-7 block overflow-hidden rounded-2xl border border-white/20 bg-white text-left shadow-2xl transition hover:translate-y-[-3px]">
+      <div className="flex items-center gap-1.5 border-b border-black/10 bg-[#f4f5f6] px-4 py-2">
+        <span className="h-2 w-2 rounded-full bg-[#ff6057]" /><span className="h-2 w-2 rounded-full bg-[#febc2e]" /><span className="h-2 w-2 rounded-full bg-[#28c840]" />
+        <span className="ml-3 truncate text-[9px] text-slate-500">{new URL(project.live).hostname}</span>
+        <Icon name="external" size={11} className="ml-auto text-slate-400" />
+      </div>
+      {isSwift ? (
+        <>
+          <div className="flex items-center justify-between gap-3 px-4 py-3 text-[#101426] sm:px-6">
+            <div className="flex items-center gap-2"><span className="grid h-7 w-7 place-items-center rounded-lg bg-[#193e2e] text-sm font-black text-white">S</span><span className="text-sm font-black">Swift<span className="text-emerald-500">PMS</span></span></div>
+            <div className="hidden gap-4 text-[8px] font-semibold text-slate-600 sm:flex"><span>Product</span><span>Solutions</span><span>Features</span><span>Pricing</span></div>
+            <span className="rounded-md bg-[#193e2e] px-3 py-2 text-[8px] font-bold text-white">Onboard Organization</span>
+          </div>
+          <div className="relative isolate overflow-hidden bg-[#1b3b2e] px-5 py-7 sm:px-8 sm:py-9">
+            <svg viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true" className="absolute inset-0 -z-20 h-full w-full">
+              <rect width="800" height="400" fill="#799178" />
+              <path d="M-40 300L600 -30L750 20L60 460" fill="#b4b6a5" />
+              {[0, 1, 2].map((row) => [0, 1, 2, 3].map((col) => <g key={`${row}-${col}`} transform={`translate(${col * 220 + row * 55 - 90},${row * 155 - 50}) rotate(-18)`}><rect x="10" y="20" width="148" height="86" fill="#d9d8c9" /><path d="M0 20L78 -22L170 20L92 62Z" fill="#56665e" /><rect x="27" y="55" width="14" height="23" fill="#385856" /><rect x="58" y="69" width="14" height="23" fill="#385856" /><rect x="110" y="57" width="14" height="23" fill="#385856" /></g>))}
+            </svg>
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#123527]/95 via-[#123527]/75 to-[#123527]/25" />
+            <span className="inline-block rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-[8px] font-bold uppercase tracking-[0.18em] text-emerald-50">Commercial property platform</span>
+            <p className="mt-4 max-w-[420px] text-[clamp(1.8rem,4vw,3rem)] font-black leading-[1.02] tracking-tight text-white">Run every property from one beautiful workspace.</p>
+            <p className="mt-4 max-w-sm text-[10px] leading-5 text-emerald-50/90 sm:text-xs">Leasing, rent, maintenance, tenant communication, documents, and reporting in a single operating system.</p>
+            <div className="mt-5 flex gap-2"><span className="rounded-md bg-white px-4 py-2 text-[9px] font-bold text-[#193e2e]">Start onboarding →</span><span className="rounded-md border border-white/30 bg-white/10 px-4 py-2 text-[9px] font-bold text-white">Log in</span></div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-4 py-3 text-[#101638] sm:px-6">
+            <span className="text-xs font-bold">AASTU Research Portal</span>
+            <span className="hidden flex-1 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-[8px] text-slate-400 sm:block">Search datasets by title, keyword, subject, or researcher...</span>
+            <span className="text-[8px]">Login</span><span className="rounded-md bg-[#ad820d] px-3 py-2 text-[8px] font-bold text-white">Register</span>
+          </div>
+          <div className="grid gap-5 p-5 text-[#101638] sm:grid-cols-2 sm:p-8">
+            <div>
+              <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#ad820d]">Research excellence at AASTU</p>
+              <p className="mt-4 font-serif text-[clamp(1.4rem,3vw,2.3rem)] font-bold leading-tight">A living archive of research, donated by its authors</p>
+              <p className="mt-3 font-serif text-sm font-bold text-[#364c79]">Where ideas become impact</p>
+              <p className="mt-3 text-[10px] leading-5 text-slate-600">Discover research datasets, explore new ideas, and build on knowledge shared by the AASTU research community.</p>
+              <div className="mt-4 flex gap-8 border-t border-slate-200 pt-3"><span className="text-[8px] text-slate-500"><strong className="mb-1 block font-serif text-xl text-[#101638]">13</strong>DATASETS ARCHIVED</span><span className="text-[8px] text-slate-500"><strong className="mb-1 block font-serif text-xl text-[#101638]">2</strong>CONTRIBUTING RESEARCHERS</span></div>
+            </div>
+            <svg viewBox="0 0 400 290" role="img" aria-label="Illustrated university research buildings" className="h-full min-h-[180px] w-full self-center overflow-hidden rounded-xl bg-sky-400">
+              <rect width="400" height="290" fill="#08a6ec" /><rect y="223" width="400" height="67" fill="#bbb8a6" /><path d="M0 238H400V258H0Z" fill="#738055" />
+              <path d="M0 90L135 62L159 83V233H0Z" fill="#d6c88f" /><path d="M135 62L210 87V234H135Z" fill="#9a9c94" />
+              <path d="M220 48L400 17V233H220Z" fill="#ddca89" /><path d="M213 47L400 12V29L213 65Z" fill="#b7a161" />
+              {[0, 1, 2, 3].map((floor) => <g key={floor}><path d={`M0 ${104 + floor * 31}L128 ${82 + floor * 31}V${98 + floor * 31}L0 ${120 + floor * 31}Z`} fill="#203a48" /><path d={`M230 ${74 + floor * 37}L400 ${45 + floor * 37}V${64 + floor * 37}L230 ${93 + floor * 37}Z`} fill="#203a48" /><path d={`M146 ${89 + floor * 32}L195 ${104 + floor * 32}V${120 + floor * 32}L146 ${105 + floor * 32}Z`} fill="#3b5868" /></g>)}
+              <path d="M260 233L325 217L355 245L271 251Z" fill="#dedbd0" /><path d="M0 279Q170 231 400 269" fill="none" stroke="#ddd9c9" strokeWidth="12" />
+            </svg>
+          </div>
+        </>
+      )}
+    </a>
+  );
+}
+
 function ProjectCommandCenter({ activeProject, setActiveProject, setProjectAutoMove }) {
   const selected = projects[activeProject];
   const isZecProject = selected.title === "AI Automation Systems";
   const isFoodieFinder = selected.visual === "foodieFinder";
   const isBookVerse = selected.visual === "bookVerse";
   const isSmartUtility = selected.visual === "smartUtility";
+  const hasWebsitePreview = selected.visual === "swift" || selected.visual === "researchPortal";
   const hasProjectLinks = Boolean(selected.github || selected.live || selected.website || isZecProject);
 
   const primaryLink = selected.live || selected.website || (isZecProject ? zecAgency.url : "#projects");
@@ -1503,7 +1564,7 @@ function ProjectCommandCenter({ activeProject, setActiveProject, setProjectAutoM
               </motion.div>
             )}
 
-            {!isSmartUtility && !isBookVerse && !isFoodieFinder && !isZecProject && selected.visual !== "agriBotControl" && (
+            {!hasWebsitePreview && !isSmartUtility && !isBookVerse && !isFoodieFinder && !isZecProject && selected.visual !== "agriBotControl" && (
               <motion.div key={activeProject} initial={{ opacity: 0, scale: 0.9, rotate: -4 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 0.65, type: "spring" }} className="absolute right-8 top-8 h-72 w-48 rounded-[2.25rem] border border-white/20 bg-black/35 backdrop-blur-xl" />
             )}
 
@@ -1530,6 +1591,7 @@ function ProjectCommandCenter({ activeProject, setActiveProject, setProjectAutoM
                   )}
                 </div>
 
+                {hasWebsitePreview && <WebsiteProjectPreview project={selected} />}
                 <p className={isSmartUtility || isBookVerse || isFoodieFinder ? "mt-7 max-w-[310px] text-lg leading-7 text-white/78" : "mt-8 max-w-2xl text-xl leading-8 text-white/75"}>{isZecProject ? zecAgency.positioning : selected.description}</p>
                 {isZecProject && <ZecFeatureStrip />}
               </div>
@@ -1599,15 +1661,15 @@ const tests = [
   { name: "mobile navigation is sticky and uses hamburger menu with responsive grid", passed: true },
   { name: "hero projects button links to project section", passed: true },
   { name: "project command center includes ZEC official link and founder role", passed: typeof ZecFeatureStrip === "function" && zecAgency.url === "https://zecaiagency.me/" && zecAgency.role === "Co-Founder & Software Engineer" },
-  { name: "ZEC project uses static website preview instead of blocked iframe", passed: projects[0].website === zecAgency.url },
+  { name: "ZEC project uses static website preview instead of blocked iframe", passed: projects.find((project) => project.title === "AI Automation Systems").website === zecAgency.url },
   { name: "ZEC project title avoids preview overlap", passed: true },
-  { name: "private ZEC project does not show GitHub button", passed: !projects[0].github && projects[0].website === zecAgency.url },
+  { name: "private ZEC project does not show GitHub button", passed: !projects.find((project) => project.title === "AI Automation Systems").github && projects.find((project) => project.title === "AI Automation Systems").website === zecAgency.url },
   { name: "hero featured project card has balanced responsive layout", passed: true },
   { name: "hero featured project supports automatic horizontal movement", passed: true },
   { name: "hero side cards use active project website and stack data", passed: true },
   { name: "hero featured project links to exact live or official project page", passed: projects.every((project) => project.live || project.website) },
-  { name: "hero featured card includes ZEC company feature", passed: projects[0].company === "ZEC AI Automation Agency" && projects[0].role === "Co-Founder & Software Engineer" && projects[0].website === "https://zecaiagency.me/" && projects[0].features.length >= 5 },
-  { name: "hero featured card remains compact", passed: projects[0].features.slice(0, 4).length === 4 },
+  { name: "hero featured card includes ZEC company feature", passed: projects.find((project) => project.title === "AI Automation Systems").company === "ZEC AI Automation Agency" && projects.find((project) => project.title === "AI Automation Systems").role === "Co-Founder & Software Engineer" && projects.find((project) => project.title === "AI Automation Systems").website === "https://zecaiagency.me/" && projects.find((project) => project.title === "AI Automation Systems").features.length >= 5 },
+  { name: "hero featured card remains compact", passed: projects.find((project) => project.title === "AI Automation Systems").features.slice(0, 4).length === 4 },
   { name: "about section uses professional responsive card grid", passed: skills.length === 5 && profile.education.includes("AASTU") },
   { name: "education section has equal-height university and certificate panels", passed: education.shortName === "AASTU" && education.logo.includes("aastu.edu.et") && typeof UniversityLogoMark === "function" && certs.every((cert) => cert.skills.length > 0) },
   { name: "GDG Node Express certificate is listed without image card", passed: certs[0].title === "GDG Node/Express.js Track" && certs[0].status === "Certificate listed" },
