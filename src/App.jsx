@@ -144,6 +144,33 @@ const projects = [
 
 const experience = [
   {
+    date: "",
+    company: "Snapwar",
+    role: "",
+    location: "",
+    stack: [],
+    summary: "Worked at Snapwar.",
+    bullets: []
+  },
+  {
+    date: "",
+    company: "Addis Ababa Science and Technology University",
+    role: "",
+    location: "",
+    stack: [],
+    summary: "Worked at Addis Ababa Science and Technology University.",
+    bullets: []
+  },
+  {
+    date: "",
+    company: "Demera NGO",
+    role: "",
+    location: "",
+    stack: [],
+    summary: "Worked at Demera NGO.",
+    bullets: []
+  },
+  {
     date: "Apr 2026 - Present",
     company: "ZEC AI Automation Agency",
     role: "Co-Founder, Software Engineer and AI Automation Engineer",
@@ -774,13 +801,13 @@ function ExperienceDetailCard({ item, index }) {
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="mono text-[10px] font-black uppercase tracking-[0.28em] text-black/40">Selected experience</p>
-          <h3 className="mt-3 max-w-2xl text-2xl font-semibold leading-tight tracking-[-0.04em] md:text-3xl">{item.role}</h3>
-          <p className="mt-2 font-mono text-sm text-black/55">{item.company}</p>
+          <h3 className="mt-3 max-w-2xl text-2xl font-semibold leading-tight tracking-[-0.04em] md:text-3xl">{item.role || item.company}</h3>
+          {item.role && <p className="mt-2 font-mono text-sm text-black/55">{item.company}</p>}
         </div>
         <span className="rounded-full bg-black px-4 py-2 font-mono text-xs text-white">0{index + 1}</span>
       </div>
 
-      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+      {(item.date || item.location || item.stack.length > 0) && <div className="mt-5 grid gap-3 sm:grid-cols-3">
         <div className="rounded-2xl border border-black/10 bg-white p-3">
           <p className="mono text-[9px] uppercase tracking-[0.22em] text-black/35">Period</p>
           <p className="mt-1 text-sm font-semibold">{item.date}</p>
@@ -793,7 +820,7 @@ function ExperienceDetailCard({ item, index }) {
           <p className="mono text-[9px] uppercase tracking-[0.22em] text-black/35">Focus</p>
           <p className="mt-1 text-sm font-semibold">{item.stack.slice(0, 2).join(" + ")}</p>
         </div>
-      </div>
+      </div>}
 
       <p className="mt-5 text-sm leading-6 text-black/68">{item.summary}</p>
 
@@ -1680,7 +1707,7 @@ const tests = [
   { name: "LeetCode badges use improved official-style labels", passed: leetcodeProfile.badges.length === 3 },
   { name: "LeetCode profile visual renders without broken image", passed: leetcodeProfile.screenshot === null && typeof LeetCodeProfileImage === "function" },
   { name: "LeetCode language list is complete", passed: leetcodeProfile.languages.length === 7 && leetcodeProfile.languages.some(([lang, count]) => lang === "Java" && count === 34) && leetcodeProfile.languages.some(([lang, count]) => lang === "Bash" && count === 2) },
-  { name: "experience detail component exists and uses compact CV data", passed: typeof ExperienceDetailCard === "function" && experience.every((item) => item.bullets.length >= 2 && item.location && item.date) }
+  { name: "experience detail component supports confirmed details and organization-only entries", passed: typeof ExperienceDetailCard === "function" && experience.every((item) => item.company && item.summary && Array.isArray(item.bullets) && Array.isArray(item.stack)) }
 ];
 
 tests.forEach((test) => console.assert(test.passed, `Test failed: ${test.name}`));
@@ -2063,7 +2090,7 @@ export default function ElsaPortfolioDesign() {
                     <motion.div animate={{ x: ["-50%", "150%"] }} transition={{ duration: 6 + index * 0.18, repeat: Infinity, ease: "easeInOut" }} className="absolute top-0 h-px w-1/2 bg-gradient-to-r from-transparent via-white/35 to-transparent" />
                     <div className="mb-8 flex items-start justify-between gap-4">
                       <span className={isSelected ? "grid h-12 w-12 place-items-center rounded-full bg-cyan-300 font-mono text-sm font-black text-black" : "grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/[0.03] font-mono text-sm font-black text-white/55"}>0{index + 1}</span>
-                      <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5 font-mono text-[10px] text-white/50">{item.date}</span>
+                      {item.date && <span className="rounded-full border border-white/10 bg-black/25 px-3 py-1.5 font-mono text-[10px] text-white/50">{item.date}</span>}
                     </div>
                     <h3 className="text-2xl font-semibold leading-tight text-white">{item.company}</h3>
                     <p className="mono mt-3 min-h-[48px] text-sm leading-6 text-white/72">{item.role}</p>
@@ -2105,7 +2132,7 @@ export default function ElsaPortfolioDesign() {
                 <h3 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.05em] text-white md:text-4xl">{experience[activeExperience].company}</h3>
                 <p className="mono mt-3 text-base leading-7 text-white/75">{experience[activeExperience].role}</p>
                 <p className="mt-4 line-clamp-3 text-sm leading-6 text-white/62">{experience[activeExperience].summary}</p>
-                <div className="mt-5 grid gap-3 sm:grid-cols-2">
+                {(experience[activeExperience].date || experience[activeExperience].location) && <div className="mt-5 grid gap-3 sm:grid-cols-2">
                   <div className="rounded-2xl border border-white/10 bg-black/25 p-3">
                     <p className="mono text-[9px] uppercase tracking-[0.22em] text-white/35">Period</p>
                     <p className="mt-1 text-sm font-semibold text-white">{experience[activeExperience].date}</p>
@@ -2114,7 +2141,7 @@ export default function ElsaPortfolioDesign() {
                     <p className="mono text-[9px] uppercase tracking-[0.22em] text-white/35">Location</p>
                     <p className="mt-1 text-sm font-semibold text-white">{experience[activeExperience].location}</p>
                   </div>
-                </div>
+                </div>}
               </div>
             </motion.div>
 
