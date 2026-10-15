@@ -2167,13 +2167,16 @@ export default function ElsaPortfolioDesign() {
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }} className="absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full border border-white/10" />
               <motion.div animate={{ opacity: [0.15, 0.35, 0.15], scale: [1, 1.12, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-12 right-12 h-44 w-44 rounded-full bg-cyan-300/20 blur-3xl" />
               <div style={{ transform: "translateZ(50px)" }} className="relative z-10 flex min-h-[360px] flex-col justify-between gap-7">
-                <div className="flex items-center gap-5 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
-                  <img src={educationPortrait} alt="Elsa Alemayehu at university" width="721" height="736" loading="lazy" className="h-28 w-24 shrink-0 rounded-2xl object-cover object-top sm:h-36 sm:w-32" />
-                  <div className="min-w-0">
-                    <h3 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-3xl">{profile.name}</h3>
-                    <p className="mt-2 text-sm leading-6 text-cyan-100/75">{education.level}</p>
-                  </div>
-                </div>
+                <figure className="group relative isolate overflow-hidden rounded-[2rem] border border-cyan-100/25 bg-slate-950 shadow-[0_24px_65px_rgba(0,0,0,0.4)]">
+                  <img src={educationPortrait} alt="Elsa Alemayehu at university" width="721" height="736" loading="lazy" className="aspect-[721/800] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.035]" />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#07131e] via-transparent to-transparent" />
+                  <span className="absolute left-5 top-5 rounded-full border border-white/30 bg-[#07131e]/65 px-3 py-2 font-mono text-[9px] uppercase tracking-[0.2em] text-cyan-50 backdrop-blur-md">AASTU · Graduating Class</span>
+                  <figcaption className="absolute inset-x-0 bottom-0 p-5 sm:p-7">
+                    <div className="mb-4 h-1 w-12 rounded-full bg-cyan-200 shadow-[0_0_20px_rgba(165,243,252,0.5)]" />
+                    <h3 className="text-[clamp(1.65rem,3vw,2.5rem)] font-semibold leading-tight tracking-[-0.04em] text-white">{profile.name}</h3>
+                    <p className="mt-2 max-w-xs text-sm leading-6 text-cyan-50/85">{education.level}</p>
+                  </figcaption>
+                </figure>
                 <div className="flex flex-wrap items-start justify-between gap-6">
                   <div>
                     <p className="mono text-xs uppercase tracking-[0.35em] text-cyan-100/55">University</p>
