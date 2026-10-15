@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import educationPortrait from "./photo_2026-10-15_21-47-39.jpg";
+import leetcodeAvatar from "./leetcode-avatar.jpg";
 
 const profile = {
   name: "Elsa Alemayehu",
@@ -356,15 +357,18 @@ const leetcodeProfile = {
   url: "https://leetcode.com/u/elsa_2116/",
   screenshot: null,
   badgeImage: "https://assets.leetcode.com/static_assets/others/lg2550.png",
-  rank: "226,048",
-  solved: "459/3935",
+  rank: "227,751",
+  solved: "486/4082",
   acceptance: "93.42%",
-  submissions: "321",
-  activeDays: "220",
+  submissions: "187",
+  activeDays: "141",
   maxStreak: "46",
-  badges: ["100 Days Badge 2025", "200 Days Badge 2025", "50 Days Badge 2025"],
+  badgeCount: 4,
+  mostRecentBadge: "50 Days Badge 2026",
+  attempting: 7,
+  badges: ["100 Days Badge 2025", "200 Days Badge 2025", "50 Days Badge 2025", "50 Days Badge 2026"],
   languages: [
-    ["Python3", 318],
+    ["Python3", 343],
     ["MySQL", 55],
     ["C++", 42],
     ["Java", 34],
@@ -373,9 +377,9 @@ const leetcodeProfile = {
     ["Bash", 2]
   ],
   difficulty: [
-    ["Easy", "297/944"],
-    ["Medium", "156/2057"],
-    ["Hard", "6/934"]
+    ["Easy", "323/971"],
+    ["Medium", "157/2128"],
+    ["Hard", "6/983"]
   ],
   skills: ["Array x173", "String x132", "Math x90", "Hash Table x74", "Database x55", "Two Pointers x57", "Dynamic Programming x35", "Backtracking x13"]
 };
@@ -860,72 +864,57 @@ function LeetCodeBadge({ label, tone = "cyan" }) {
 }
 
 function LeetCodeProfileImage() {
-  const months = ["May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May"];
-  const blocks = Array.from({ length: 156 }, (_, i) => {
-    const hot = [8, 9, 10, 18, 21, 24, 25, 27, 28, 29, 35, 36, 41, 46, 47, 48, 49, 50, 54, 55, 59, 60, 61, 62, 63, 70, 72, 73, 74, 80, 81, 82, 83, 84, 88, 89, 90, 91, 92, 96, 97, 98, 99, 100, 104, 105, 106, 107, 108, 112, 113, 114, 115, 116].includes(i);
-    const medium = [4, 15, 19, 20, 32, 39, 44, 57, 68, 69, 76, 77, 85, 93, 101, 109, 117].includes(i);
-    return hot ? "hot" : medium ? "medium" : "quiet";
+  const months = ["Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"];
+  const recentSubmissions = [
+    ["Number of Common Factors", "16 days ago"],
+    ["Divide a String Into Groups of Size k", "17 days ago"],
+    ["Apply Operations to an Array", "19 days ago"]
+  ];
+  // Illustrative activity pattern based on the supplied profile capture.
+  const blocks = Array.from({ length: 53 * 7 }, (_, index) => {
+    const week = Math.floor(index / 7);
+    const day = index % 7;
+    const active = week < 18 || [34, 35, 37, 38, 48, 49].includes(week);
+    return active && (week * 3 + day * 5) % 9 > 2 ? ["#006d24", "#009b35", "#7ee08b"][(week + day) % 3] : "#383838";
   });
 
   return (
-    <div className="overflow-hidden rounded-[2rem] bg-[#202020] p-5 text-white shadow-2xl ring-1 ring-white/10">
-      <div className="grid gap-4 md:grid-cols-[1fr_1fr]">
-        <div className="rounded-lg bg-[#282828] p-6">
-          <div className="grid grid-cols-[1fr_auto] gap-5">
-            <div className="flex items-center justify-center">
-              <div className="relative flex h-44 w-44 items-center justify-center rounded-full">
-                <div className="absolute inset-0 rounded-full border-[7px] border-yellow-500/35 border-b-cyan-400 border-l-cyan-500 border-r-red-500/50 border-t-yellow-400" />
-                <div className="text-center">
-                  <div className="text-5xl font-black tracking-[-0.08em]">459<span className="text-base font-normal tracking-normal text-white/75">/3935</span></div>
-                  <div className="mt-1 text-sm font-semibold text-white"><span className="text-green-400">✓</span> Solved</div>
-                  <div className="mt-8 text-sm text-white/45">6 Attempting</div>
-                </div>
+    <div className="overflow-x-auto rounded-[1.75rem] bg-[#1a1a1a] text-[#efefef] shadow-2xl ring-1 ring-white/10" tabIndex={0} aria-label="LeetCode profile preview based on the supplied screenshot; scroll horizontally on small screens">
+      <div className="grid min-w-[900px] grid-cols-[235px_minmax(0,1fr)] gap-7 p-6 lg:gap-8 lg:p-8">
+        <aside className="min-w-0 text-sm">
+          <div className="flex items-start gap-3">
+            <img src={leetcodeAvatar} alt="Elsa Alemayehu" width="960" height="1280" loading="lazy" className="h-20 w-20 shrink-0 rounded-lg object-cover object-top" />
+            <div className="min-w-0 pt-1"><p className="font-semibold">{leetcodeProfile.name}</p><p className="mt-1 text-xs text-white/55">{leetcodeProfile.username}</p><p className="mt-4 text-white/70">Rank <strong className="text-white">{leetcodeProfile.rank}</strong></p></div>
+          </div>
+          <p className="mt-5 text-white/60"><span className="text-white">0</span> Following <span className="mx-2 text-white/20">|</span> <span className="text-white">1</span> Followers</p>
+          <a href={leetcodeProfile.url} target="_blank" rel="noreferrer" className="mt-4 block rounded-md bg-green-500/10 px-4 py-3 text-center font-semibold text-green-400 transition hover:bg-green-500/20">View Profile <span aria-hidden="true">↗</span></a>
+          <div className="mt-5 space-y-4 border-b border-white/10 pb-5 text-white/75"><p className="flex items-center gap-3"><Icon name="location" size={15} />Ethiopia</p><p className="text-xs leading-5">Addis Ababa Science and Technology University</p></div>
+          <h4 className="mt-5 font-semibold">Community Stats</h4>
+          <div className="mt-4 space-y-4 border-b border-white/10 pb-5">{[["Views", "#00aaff"], ["Solution", "#5bd5f4"], ["Discuss", "#00bba9"], ["Reputation", "#ffa116"]].map(([label, color]) => <div key={label}><p className="flex items-center gap-3 text-white/75"><span className="h-3 w-3 rounded-full" style={{ backgroundColor: color }} />{label} <span className="text-white">0</span></p><p className="ml-6 mt-1 text-[10px] text-white/45">Last week 0</p></div>)}</div>
+          <h4 className="mt-5 font-semibold">Languages</h4>
+          <div className="mt-4 flex items-center justify-between gap-2 text-[10px]"><span className="rounded-full bg-white/10 px-3 py-1.5">Python3</span><span><strong>343</strong> <span className="text-white/50">problems solved</span></span></div>
+        </aside>
+        <div className="min-w-0 space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex items-center justify-between gap-3 rounded-xl bg-[#272727] p-4">
+              <div className="relative grid h-40 w-40 shrink-0 place-items-center">
+                <svg viewBox="0 0 160 160" aria-hidden="true" className="absolute inset-0 h-full w-full -rotate-90"><circle cx="80" cy="80" r="68" fill="none" stroke="#204944" strokeWidth="5" strokeDasharray="290 427" strokeLinecap="round" /><circle cx="80" cy="80" r="68" fill="none" stroke="#b39010" strokeWidth="5" strokeDasharray="125 427" strokeDashoffset="-295" strokeLinecap="round" /><circle cx="80" cy="80" r="68" fill="none" stroke="#2bb9b5" strokeWidth="5" strokeDasharray="29 427" strokeDashoffset="-170" strokeLinecap="round" /></svg>
+                <div className="text-center"><p className="text-3xl font-semibold tracking-tight">486<span className="text-xs font-normal">/4082</span></p><p className="mt-1 text-xs"><span className="text-green-500">✓</span> Solved</p><p className="mt-6 text-[10px] text-white/50">{leetcodeProfile.attempting} Attempting</p></div>
               </div>
+              <div className="grid flex-1 gap-2">{leetcodeProfile.difficulty.map(([label, value], index) => <div key={label} className="rounded-md bg-white/[0.06] px-2 py-2 text-center text-[10px]"><p style={{ color: ["#00c4cb", "#ffb700", "#ff4350"][index] }}>{label === "Medium" ? "Med." : label}</p><p className="mt-1 font-semibold">{value}</p></div>)}</div>
             </div>
-            <div className="grid gap-3">
-              {[["Easy", "297/944", "text-cyan-300"], ["Med.", "156/2057", "text-yellow-300"], ["Hard", "6/934", "text-red-400"]].map(([label, value, color]) => (
-                <div key={label} className="flex min-w-28 flex-col items-center justify-center rounded-md bg-white/[0.06] px-4 py-3">
-                  <span className={`text-sm font-bold ${color}`}>{label}</span>
-                  <span className="text-sm font-black">{value}</span>
-                </div>
-              ))}
-            </div>
+            <div className="rounded-xl bg-[#272727] p-4"><p className="text-xs text-white/55">Badges</p><p className="mt-1 text-2xl">{leetcodeProfile.badgeCount}</p><div className="my-1 flex justify-center gap-2"><LeetCodeBadge label="100 days" tone="purple" /><LeetCodeBadge label="50 days" tone="lime" /><LeetCodeBadge label="200 days" tone="cyan" /></div><p className="text-[10px] text-white/50">Most Recent Badge</p><p className="mt-1 text-sm">{leetcodeProfile.mostRecentBadge}</p></div>
+          </div>
+          <div className="rounded-xl bg-[#272727] p-4">
+            <div className="mb-4 flex items-center justify-between gap-4"><p className="text-xs text-white/65"><strong className="text-lg text-white">{leetcodeProfile.submissions}</strong> submissions in the past one year</p><p className="text-[9px] text-white/50">Total active days: <b className="text-white/80">{leetcodeProfile.activeDays}</b><span className="ml-3">Max streak: <b className="text-white/80">{leetcodeProfile.maxStreak}</b></span></p></div>
+            <div className="grid grid-flow-col grid-rows-[repeat(7,minmax(0,1fr))] gap-[3px]" role="img" aria-label="Illustration of the activity pattern in the supplied screenshot">{blocks.map((color, index) => <span key={index} className="aspect-square rounded-[2px]" style={{ backgroundColor: color }} />)}</div>
+            <div className="mt-2 flex justify-between text-[10px] text-white/55">{months.map((month, index) => <span key={`${month}-${index}`}>{month}</span>)}</div>
+          </div>
+          <div className="rounded-xl bg-[#272727] p-4">
+            <div className="mb-4 flex items-center gap-5 text-xs font-semibold text-white/65"><span className="rounded-md bg-white/10 px-3 py-3 text-white">Recent AC</span><span>List</span><span>Solutions</span><span>Discuss</span><a href={leetcodeProfile.url} target="_blank" rel="noreferrer" className="ml-auto text-[10px] hover:text-white">View all submissions ↗</a></div>
+            {recentSubmissions.map(([title, time], index) => <div key={title} className={`flex items-center justify-between gap-4 rounded-md px-4 py-5 text-xs ${index % 2 === 0 ? "bg-white/[0.06]" : ""}`}><p className="font-semibold">{title}</p><span className="shrink-0 text-white/50">{time}</span></div>)}
           </div>
         </div>
-
-        <div className="rounded-lg bg-[#282828] p-6">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="mb-2 text-sm text-white/80">Badges</div>
-              <div className="text-3xl font-normal leading-none">3</div>
-            </div>
-            <Icon name="arrow" size={30} className="rotate-[-45deg] text-white/65" />
-          </div>
-
-          <div className="mt-4 flex items-center justify-end gap-8 pr-10">
-            <LeetCodeBadge label="100 days" tone="cyan" />
-            <LeetCodeBadge label="200 days" tone="purple" />
-            <LeetCodeBadge label="50 days" tone="lime" />
-          </div>
-
-          <div className="mt-3">
-            <div className="text-sm text-white/65">Most Recent Badge</div>
-            <div className="mt-1 text-xl font-normal leading-snug text-white">200 Days Badge 2025</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-4 rounded-lg bg-[#282828] p-5">
-        <div className="mb-5 flex flex-wrap items-center justify-between gap-4 text-sm text-white/70">
-          <div><span className="text-2xl font-black text-white">321</span> submissions in the past one year</div>
-          <div className="flex gap-6"><span>Total active days: <b className="text-white">220</b></span><span>Max streak: <b className="text-white">46</b></span></div>
-        </div>
-        <div className="grid grid-cols-[repeat(39,minmax(0,1fr))] gap-1">
-          {blocks.map((state, i) => (
-            <div key={i} className={`aspect-square rounded-[3px] ${state === "hot" ? "bg-green-500" : state === "medium" ? "bg-green-700" : "bg-white/10"}`} />
-          ))}
-        </div>
-        <div className="mt-3 flex justify-between text-sm text-white/70">{months.map((month, i) => <span key={`${month}-${i}`}>{month}</span>)}</div>
       </div>
     </div>
   );
@@ -934,7 +923,7 @@ function LeetCodeProfileImage() {
 function LeetCodeShowcase() {
   const statCards = [
     ["Solved", leetcodeProfile.solved, "Across Easy, Medium, and Hard problems"],
-    ["Acceptance", leetcodeProfile.acceptance, "Strong consistency across submissions"],
+    ["Badges", String(leetcodeProfile.badgeCount), leetcodeProfile.mostRecentBadge],
     ["Submissions", leetcodeProfile.submissions, "Submissions in the past year"],
     ["Active days", leetcodeProfile.activeDays, `Max streak ${leetcodeProfile.maxStreak}`]
   ];
@@ -957,6 +946,16 @@ function LeetCodeShowcase() {
             View LeetCode <Icon name="external" size={16} />
           </a>
         </div>
+      </div>
+
+      <div className="relative z-10 mb-6">
+          <div className="overflow-hidden rounded-[3rem] border border-white/15 bg-white/[0.03] p-4 shadow-[0_40px_140px_rgba(0,0,0,0.45)] backdrop-blur-xl">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-2">
+              <p className="mono text-xs uppercase tracking-[0.3em] text-white/45">Profile overview</p>
+              <span className="rounded-full border border-green-400/20 bg-green-400/10 px-4 py-2 text-xs text-green-200">{leetcodeProfile.submissions} yearly submissions</span>
+            </div>
+            <LeetCodeProfileImage />
+          </div>
       </div>
 
       <div className="relative z-10 grid gap-6 xl:grid-cols-[0.92fr_1.08fr]">
@@ -1001,13 +1000,7 @@ function LeetCodeShowcase() {
         </TiltCard>
 
         <div className="grid gap-6">
-          <div className="overflow-hidden rounded-[3rem] border border-white/15 bg-white/[0.03] p-4 shadow-[0_40px_140px_rgba(0,0,0,0.45)] backdrop-blur-xl">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-2">
-              <p className="mono text-xs uppercase tracking-[0.3em] text-white/45">Profile screenshot</p>
-              <span className="rounded-full border border-green-400/20 bg-green-400/10 px-4 py-2 text-xs text-green-200">321 yearly submissions</span>
-            </div>
-            <LeetCodeProfileImage />
-          </div>
+
 
           <div className="grid gap-6 lg:grid-cols-2">
             <div className="rounded-[3rem] border border-white/15 bg-[#f5f5f5] p-6 text-black md:p-8">
@@ -1703,9 +1696,9 @@ const tests = [
   { name: "GDG Node Express certificate is listed without image card", passed: certs[0].title === "GDG Node/Express.js Track" && certs[0].status === "Certificate listed" },
   { name: "section helper paragraphs removed for cleaner layout", passed: true },
   { name: "section eyebrow labels use clean slash format", passed: true },  { name: "hero interface card has no portrait overlay", passed: true },
-  { name: "LeetCode profile section is connected", passed: leetcodeProfile.url === "https://leetcode.com/u/elsa_2116/" && leetcodeProfile.solved === "459/3935" && typeof LeetCodeShowcase === "function" },
+  { name: "LeetCode profile section is connected", passed: leetcodeProfile.url === "https://leetcode.com/u/elsa_2116/" && leetcodeProfile.solved === "486/4082" && typeof LeetCodeShowcase === "function" },
   { name: "LeetCode badge card uses local badge UI", passed: typeof LeetCodeBadge === "function" },
-  { name: "LeetCode badges use improved official-style labels", passed: leetcodeProfile.badges.length === 3 },
+  { name: "LeetCode badges use improved official-style labels", passed: leetcodeProfile.badges.length === leetcodeProfile.badgeCount },
   { name: "LeetCode profile visual renders without broken image", passed: leetcodeProfile.screenshot === null && typeof LeetCodeProfileImage === "function" },
   { name: "LeetCode language list is complete", passed: leetcodeProfile.languages.length === 7 && leetcodeProfile.languages.some(([lang, count]) => lang === "Java" && count === 34) && leetcodeProfile.languages.some(([lang, count]) => lang === "Bash" && count === 2) },
   { name: "experience detail component supports confirmed details and organization-only entries", passed: typeof ExperienceDetailCard === "function" && experience.every((item) => item.company && item.summary && Array.isArray(item.bullets) && Array.isArray(item.stack)) }
