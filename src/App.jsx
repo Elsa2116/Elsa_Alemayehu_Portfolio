@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import educationPortrait from "./photo_2026-10-15_21-47-39.jpg";
 
 const profile = {
   name: "Elsa Alemayehu",
@@ -2165,7 +2166,14 @@ export default function ElsaPortfolioDesign() {
             <div className="relative h-full min-h-[640px] overflow-hidden rounded-[3rem] border border-cyan-300/20 bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.24),transparent_32%),rgba(255,255,255,0.035)] p-8 shadow-[0_45px_150px_rgba(0,0,0,0.52)] backdrop-blur-xl md:p-10" style={{ transformStyle: "preserve-3d" }}>
               <motion.div animate={{ rotate: 360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }} className="absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full border border-white/10" />
               <motion.div animate={{ opacity: [0.15, 0.35, 0.15], scale: [1, 1.12, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-12 right-12 h-44 w-44 rounded-full bg-cyan-300/20 blur-3xl" />
-              <div style={{ transform: "translateZ(50px)" }} className="relative z-10 flex min-h-[360px] flex-col justify-between">
+              <div style={{ transform: "translateZ(50px)" }} className="relative z-10 flex min-h-[360px] flex-col justify-between gap-7">
+                <div className="flex items-center gap-5 rounded-[1.75rem] border border-white/10 bg-black/20 p-4">
+                  <img src={educationPortrait} alt="Elsa Alemayehu at university" width="721" height="736" loading="lazy" className="h-28 w-24 shrink-0 rounded-2xl object-cover object-top sm:h-36 sm:w-32" />
+                  <div className="min-w-0">
+                    <h3 className="text-2xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-3xl">{profile.name}</h3>
+                    <p className="mt-2 text-sm leading-6 text-cyan-100/75">{education.level}</p>
+                  </div>
+                </div>
                 <div className="flex flex-wrap items-start justify-between gap-6">
                   <div>
                     <p className="mono text-xs uppercase tracking-[0.35em] text-cyan-100/55">University</p>
